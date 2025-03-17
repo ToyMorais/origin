@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 let listaDeNumerosSorteados = [];
 let numeroLimite = 50;  // Número máximo que o usuário pode escolher
 let numeroSecreto = gerarNumeroAleatorio();
