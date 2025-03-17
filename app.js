@@ -1,5 +1,5 @@
 let listaDeNumerosSorteados = [];
-let numeroLimite = 100;
+let numeroLimite = 50;  // Número máximo que o usuário pode escolher
 let numeroSecreto = gerarNumeroAleatorio();
 let tentativas = 1;
 
@@ -26,20 +26,26 @@ exibirMensagemInicial();
 
 function verificarChute() {
     let chute = document.querySelector("input").value;
-    if (chute == numeroSecreto) {
-        exibirTextoNaTela("h1", `Parabéns!`);
-        let palavraTentativa = tentativas > 1 ? "tentativas" : "tentativa";
-        let mensagemTentativas = `Você advinhou o número secreto ${numeroSecreto}, após ${tentativas} ${palavraTentativa}`;
-        exibirTextoNaTela("p", mensagemTentativas);
-        document.getElementById("chutar").setAttribute("disabled", "disabled");
-        document.getElementById("reiniciar").removeAttribute("disabled");
+    if (chute > numeroLimite || chute < 1) {
+        exibirTextoNaTela("p", `Escolha um número entre 1 e ${numeroLimite}`);
+        limparCampo();
+        return;
     } else {
-        if (chute > numeroSecreto) {
-            exibirTextoNaTela("p", "Você errou! O número secreto é menor.");
+        if (chute == numeroSecreto) {
+            exibirTextoNaTela("h1", `Parabéns!`);
+            let palavraTentativa = tentativas > 1 ? "tentativas" : "tentativa";
+            let mensagemTentativas = `Você advinhou o número secreto em ${tentativas} ${palavraTentativa}`;
+            exibirTextoNaTela("p", mensagemTentativas);
+            document.getElementById("chutar").setAttribute("disabled", "disabled");
+            document.getElementById("reiniciar").removeAttribute("disabled");
         } else {
-            exibirTextoNaTela("p", "Você errou! O número secreto é maior."); 
+            if (chute > numeroSecreto) {
+                exibirTextoNaTela("p", "Você errou! O número secreto é menor.");
+            } else {
+                exibirTextoNaTela("p", "Você errou! O número secreto é maior.");
+            }
+            tentativas++;
         }
-        tentativas++;
         limparCampo();
     }
 }
