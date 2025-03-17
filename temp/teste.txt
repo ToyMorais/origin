@@ -1,0 +1,1 @@
+Todos os arquivos na pasta "temp" não serão compartilhados com o GitHub
